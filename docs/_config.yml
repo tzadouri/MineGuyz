@@ -20,8 +20,8 @@
 
 title: MineGuyz
 email: 
-#baseurl: "teamonefour" # the subpath of your site, e.g. /blog
-baseurl: ""
+baseurl: "teamonefour" # the subpath of your site, e.g. /blog
+#baseurl: ""
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 #twitter_username: jekyllrb
