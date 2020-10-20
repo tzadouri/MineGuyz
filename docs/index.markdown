@@ -6,3 +6,5 @@ Title: Team One Four
 layout: page
 #permalink: /teamonefour
 ---
+
+![My image Name](/assets/images/myimage.jpg)
