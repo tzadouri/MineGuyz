@@ -18,3 +18,14 @@ permalink: /team/
 <br />
 #### Name: York Xu
 #### UCINetID: yuyangx3
+
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+#### Weekly Meeting Time: Wednesday 5 pm (PT)
