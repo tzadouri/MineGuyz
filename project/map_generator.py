@@ -33,6 +33,23 @@ def GetMissionXML(SIZE):
                     "<DrawCuboid x1='-20' y1='9' z1='-5' x2='20' y2='9' z2='{}' type='wool' colour='{}'/>".format(SIZE+1,random.choice(color)) + \
                     myxml + \
                   '''</DrawingDecorator>
+                  <AnimationDecorator ticksPerUpdate="40">
+                    <Linear>
+                      <CanvasBounds>
+                        <min x='-35' y='9' z='0'/>
+                        <max x='35' y='9' z='100'/>
+                      </CanvasBounds>
+                      <InitialPos x='-35' y='9' z='15'/>
+                      <InitialVelocity x='1' y='0' z='0'/>
+                    </Linear>
+                    <DrawingDecorator>
+                      <DrawCuboid x1='0' y1='0' z1='0'  x2='14' y2='0' z2='10' type='diamond_block'/>
+                      <DrawCuboid x1='15' y1='0' z1='0'  x2='20' y2='0' z2='10' type='stone'/>
+                      <DrawCuboid x1='21' y1='0' z1='0'  x2='34' y2='0' z2='10' type='diamond_block'/>
+                      <DrawCuboid x1='35' y1='0' z1='0'  x2='40' y2='0' z2='10' type='stone'/>
+                      <DrawCuboid x1='41' y1='0' z1='0'  x2='55' y2='0' z2='10' type='diamond_block'/>
+                    </DrawingDecorator>
+                  </AnimationDecorator>
                   <ServerQuitFromTimeUp timeLimitMs="30000"/>
                   <ServerQuitWhenAnyAgentFinishes/>
                 </ServerHandlers>
