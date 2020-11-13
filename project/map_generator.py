@@ -1,7 +1,7 @@
 import random
 blocktype = ["gold_block", "emerald_block"]
 color = ["WHITE", "MAGENTA", "LIGHT_BLUE", "YELLOW", "LIME", "CYAN", "PURPLE", "BLUE", "BROWN", "GREEN", "RED"]
-def GetMissionXML(SIZE,WIDTH):
+def GetMissionXML(SIZE=40,WIDTH=10):
   myxml = ""
   # bp = 
   bridgeL = int(SIZE/4)
