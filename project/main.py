@@ -27,7 +27,7 @@ from RL_DQN import QNetwork, Hyperparameters, get_action, prepare_batch, learn, 
 # Training Starts Here
 '''
 def main():
-    missionXML = map_generator.GetMissionXML(40)
+    missionXML = map_generator.GetMissionXML(40,10)
     agent_host = MalmoPython.AgentHost()
     try:
         agent_host.parse( sys.argv )
@@ -264,4 +264,9 @@ if __name__ == '__main__':
         print(agent_host.getUsage())
         exit(0)
 
+<<<<<<< HEAD
     main(agent_host)
+=======
+def __main__ = "__main__":
+    main()
+>>>>>>> 731366a196dc57a3c5f160ffc21e26de1914de80
