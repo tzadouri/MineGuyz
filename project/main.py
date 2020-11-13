@@ -13,7 +13,7 @@ from RL_DQN import QNetwork, Hyperparameters
 
 # Training Starts Here
 def main():
-    missionXML = map_generator.GetMissionXML(40)
+    missionXML = map_generator.GetMissionXML(40,10)
     agent_host = MalmoPython.AgentHost()
     try:
         agent_host.parse( sys.argv )
