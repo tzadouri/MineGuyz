@@ -1,15 +1,18 @@
 import random
-blocktype = ["gold_block", "emerald_block", "redstone_block"]
-color = ["WHITE", "ORANGE", "MAGENTA", "LIGHT_BLUE", "YELLOW", "LIME", "PINK", "CYAN", "PURPLE", "BLUE", "BROWN", "GREEN", "RED"]
-def GetMissionXML(SIZE):
+blocktype = ["gold_block", "emerald_block"]
+color = ["WHITE", "MAGENTA", "LIGHT_BLUE", "YELLOW", "LIME", "CYAN", "PURPLE", "BLUE", "BROWN", "GREEN", "RED"]
+def GetMissionXML(SIZE,WIDTH):
   myxml = ""
   # bp = 
-  for x in range(-20,21):
-        for y in range(1,int(SIZE/3)):
+  bridgeL = int(SIZE/4)
+  bridgeW = int(SIZE/8)
+  riverW = WIDTH-int(SIZE/8)
+  for x in range(-WIDTH,WIDTH+1):
+        for y in range(1,int(SIZE/4)):
+            # if random.random() < 0.2:
+            #     myxml += "<DrawBlock x='{}' y='10' z='{}' type='{}'/>".format(x,y,random.choice(blocktype))
             if random.random() < 0.2:
-                myxml += "<DrawBlock x='{}' y='10' z='{}' type='{}'/>".format(x,y,random.choice(blocktype))
-            if random.random() < 0.2:
-                myxml += "<DrawCuboid x1='{}' y1='10' z1='{}' x2='{}' y2='15' z2='{}'  type='{}' />".format(x,y,x,y,random.choice(blocktype))
+                myxml += "<DrawCuboid x1='{}' y1='10' z1='{}' x2='{}' y2='12' z2='{}'  type='{}' />".format(x,y,x,y,random.choice(blocktype))
   return '''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
             <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             
@@ -26,31 +29,37 @@ def GetMissionXML(SIZE):
                 <Weather>clear</Weather>
               </ServerInitialConditions>
               <ServerHandlers>
-                  <FlatWorldGenerator generatorString="3;15*7;1;"/>
+                  <FlatWorldGenerator generatorString="3;1;"/>
                   <DrawingDecorator>''' + \
-                    "<DrawCuboid x1='-21' y1='10' z1='-6' x2='21' y2='14' z2='{}' type='wool' colour='{}'/>".format(SIZE+1,random.choice(color)) + \
-                    "<DrawCuboid x1='-20' y1='10' z1='-5' x2='20' y2='40' z2='{}' type='air'/>".format(SIZE) + \
-                    "<DrawCuboid x1='-20' y1='9' z1='-5' x2='20' y2='9' z2='{}' type='wool' colour='{}'/>".format(SIZE+1,random.choice(color)) + \
+                    "<DrawCuboid x1='{}' y1='0' z1='-6' x2='{}' y2='8' z2='{}' type='stone'/>".format(-WIDTH-1,WIDTH+1,SIZE+1) + \
+                    "<DrawCuboid x1='{}' y1='10' z1='-6' x2='{}' y2='15' z2='{}' type='glass'/>".format(-WIDTH-1,WIDTH+1,SIZE+1) + \
+                    "<DrawCuboid x1='{}' y1='10' z1='-5' x2='{}' y2='40' z2='{}' type='air'/>".format(-WIDTH,WIDTH,SIZE) + \
+                    "<DrawCuboid x1='{}' y1='9' z1='-6' x2='{}' y2='9' z2='-1' type='wool' colour='PINK'/>".format(-WIDTH-1,WIDTH+1) + \
+                    "<DrawCuboid x1='{}' y1='9' z1='0' x2='{}' y2='9' z2='{}' type='wool' colour='{}'/>".format(-WIDTH-1,WIDTH+1,int(SIZE/4),random.choice(color)) + \
+                    "<DrawCuboid x1='{}' y1='9' z1='{}' x2='{}' y2='9' z2='{}' type='diamond_block'/>".format(-WIDTH-1,int(SIZE/4)+1,WIDTH+1,int(SIZE/4)+1) + \
+                    "<DrawCuboid x1='{}' y1='9' z1='{}' x2='{}' y2='9' z2='{}' type='wool' colour='{}'/>".format(-WIDTH-1,int(SIZE/4)+2,WIDTH+1,SIZE+1,random.choice(color)) + \
+                    "<DrawCuboid x1='{}' y1='10' z1='{}' x2='{}' y2='20' z2='{}' type='redstone_block'/>".format(-WIDTH,SIZE,WIDTH,SIZE) + \
+                    "<DrawCuboid x1='{}' y1='8' z1='-5' x2='{}' y2='8' z2='{}' type='water'/>".format(-WIDTH,WIDTH,SIZE) + \
                     myxml + \
                   '''</DrawingDecorator>
                   <AnimationDecorator ticksPerUpdate="40">
                     <Linear>
-                      <CanvasBounds>
-                        <min x='-35' y='9' z='0'/>
-                        <max x='35' y='9' z='100'/>
-                      </CanvasBounds>
-                      <InitialPos x='-35' y='9' z='15'/>
-                      <InitialVelocity x='1' y='0' z='0'/>
-                    </Linear>
-                    <DrawingDecorator>
-                      <DrawCuboid x1='0' y1='0' z1='0'  x2='14' y2='0' z2='10' type='diamond_block'/>
-                      <DrawCuboid x1='15' y1='0' z1='0'  x2='20' y2='0' z2='10' type='stone'/>
-                      <DrawCuboid x1='21' y1='0' z1='0'  x2='34' y2='0' z2='10' type='diamond_block'/>
-                      <DrawCuboid x1='35' y1='0' z1='0'  x2='40' y2='0' z2='10' type='stone'/>
-                      <DrawCuboid x1='41' y1='0' z1='0'  x2='55' y2='0' z2='10' type='diamond_block'/>
-                    </DrawingDecorator>
+                      <CanvasBounds>''' +\
+                        "<min x='{}' y='9' z='0'/>".format(-WIDTH-riverW-1) +\
+                        "<max x='{}' y='9' z='100'/>".format(WIDTH+riverW) +\
+                      '''</CanvasBounds>'''+ \
+                      "<InitialPos x='{}' y='9' z='{}'/>".format(-WIDTH-riverW-1,int(SIZE/3)) +\
+                      "<InitialVelocity x='1' y='0' z='0'/>" +\
+                    '''</Linear>
+                    <DrawingDecorator>''' + \
+                      "<DrawCuboid x1='0' y1='0' z1='0'  x2='{}' y2='0' z2='{}' type='glass'/>".format(riverW-1,bridgeL) +\
+                      "<DrawCuboid x1='{}' y1='0' z1='0'  x2='{}' y2='0' z2='{}' type='wool' colour='ORANGE'/>".format(riverW,riverW+bridgeW,bridgeL) +\
+                      "<DrawCuboid x1='{}' y1='0' z1='0'  x2='{}' y2='0' z2='{}' type='glass'/>".format(riverW+bridgeW+1,2*riverW+bridgeW-1,bridgeL) +\
+                      "<DrawCuboid x1='{}' y1='0' z1='0'  x2='{}' y2='0' z2='{}' type='wool' colour='ORANGE'/>".format(2*riverW+bridgeW,2*riverW+2*bridgeW,bridgeL) +\
+                      "<DrawCuboid x1='{}' y1='0' z1='0'  x2='{}' y2='0' z2='{}' type='glass'/>".format(2*riverW+2*bridgeW+1,3*riverW+2*bridgeW,bridgeL) +\
+                    '''</DrawingDecorator>
                   </AnimationDecorator>
-                  <ServerQuitFromTimeUp timeLimitMs="30000"/>
+                  <ServerQuitFromTimeUp timeLimitMs="300000"/>
                   <ServerQuitWhenAnyAgentFinishes/>
                 </ServerHandlers>
               </ServerSection>
