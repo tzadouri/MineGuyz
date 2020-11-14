@@ -10,16 +10,16 @@ def GetMissionXML(SIZE , OBS_SIZE, MAX_EPISODE_STEPS):
   bridgeW = int(SIZE/8)
   riverW = WIDTH-int(SIZE/8)
   
-  xml_position = ""
-  for i in range(1,int(SIZE),4):
-        for j in range(-WIDTH,WIDTH+1):
-          xml_position += "<Marker oneshot='true' reward='1' tolerance='0.1' x='{}' y='10' z='{}' />".format(j, i)
+  # xml_position = ""
+  # for i in range(1,int(SIZE),4):
+  #       for j in range(-WIDTH,WIDTH+1):
+  #         xml_position += "<Marker oneshot='true' reward='1' tolerance='0.1' x='{}' y='10' z='{}' />".format(j, i)
 
   for x in range(-WIDTH,WIDTH+1):
         for y in range(1,int(SIZE/4)):
             # if random.random() < 0.2:
             #     myxml += "<DrawBlock x='{}' y='10' z='{}' type='{}'/>".format(x,y,random.choice(blocktype))
-            if random.random() < 0.15:
+            if random.random() < 0.1:
                 myxml += "<DrawCuboid x1='{}' y1='10' z1='{}' x2='{}' y2='12' z2='{}'  type='{}' />".format(x,y,x,y,random.choice(blocktype))
   return '''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
             <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -45,8 +45,10 @@ def GetMissionXML(SIZE , OBS_SIZE, MAX_EPISODE_STEPS):
                     "<DrawCuboid x1='{}' y1='9' z1='-6' x2='{}' y2='9' z2='-1' type='wool' colour='PINK'/>".format(-WIDTH-1,WIDTH+1) + \
                     "<DrawCuboid x1='{}' y1='9' z1='0' x2='{}' y2='9' z2='{}' type='wool' colour='{}'/>".format(-WIDTH-1,WIDTH+1,int(SIZE/4),random.choice(color)) + \
                     "<DrawCuboid x1='{}' y1='9' z1='{}' x2='{}' y2='9' z2='{}' type='diamond_block'/>".format(-WIDTH-1,int(SIZE/4)+1,WIDTH+1,int(SIZE/4)+1) + \
-                    "<DrawCuboid x1='{}' y1='9' z1='{}' x2='{}' y2='9' z2='{}' type='wool' colour='{}'/>".format(-WIDTH-1,int(SIZE/4)+2,WIDTH+1,SIZE+1,random.choice(color)) + \
-                    "<DrawCuboid x1='{}' y1='10' z1='{}' x2='{}' y2='0' z2='{}' type='redstone_block'/>".format(-WIDTH,SIZE,WIDTH,SIZE) + \
+                    "<DrawCuboid x1='{}' y1='9' z1='{}' x2='{}' y2='9' z2='{}' type='wool' colour='{}'/>".format(-WIDTH-1,int(SIZE/4)+2,WIDTH+1,int(SIZE*2/3)-2,random.choice(color)) + \
+                    "<DrawCuboid x1='{}' y1='9' z1='{}' x2='{}' y2='9' z2='{}' type='iron_block'/>".format(-WIDTH,int(SIZE*2/3)-1,WIDTH,int(SIZE*2/3)-1) + \
+                    "<DrawCuboid x1='{}' y1='9' z1='{}' x2='{}' y2='9' z2='{}' type='wool' colour='{}'/>".format(-WIDTH-1,int(SIZE*2/3),WIDTH+1,SIZE+1,random.choice(color)) + \
+                    "<DrawCuboid x1='{}' y1='9' z1='{}' x2='{}' y2='10' z2='{}' type='redstone_block'/>".format(-WIDTH,SIZE+1,WIDTH,SIZE+1) + \
                     "<DrawCuboid x1='{}' y1='8' z1='-5' x2='{}' y2='8' z2='{}' type='water'/>".format(-WIDTH,WIDTH,SIZE) + \
                     myxml + \
                   '''</DrawingDecorator>
@@ -67,7 +69,6 @@ def GetMissionXML(SIZE , OBS_SIZE, MAX_EPISODE_STEPS):
                       "<DrawCuboid x1='{}' y1='0' z1='0'  x2='{}' y2='0' z2='{}' type='glass'/>".format(2*riverW+2*bridgeW+1,3*riverW+2*bridgeW,bridgeL) +\
                     '''</DrawingDecorator>
                   </AnimationDecorator>
-                  <ServerQuitFromTimeUp timeLimitMs="300000"/>
                   <ServerQuitWhenAnyAgentFinishes/>
                 </ServerHandlers>
               </ServerSection>
@@ -88,18 +89,16 @@ def GetMissionXML(SIZE , OBS_SIZE, MAX_EPISODE_STEPS):
                   </ObservationFromGrid>
                   <AgentQuitFromReachingCommandQuota total="'''+str(MAX_EPISODE_STEPS)+'''" />
                   <RewardForTouchingBlockType>
-                    <Block reward="-1" type="diamond_block" behaviour="onceOnly" />
-                    <Block reward="-1" type="glass" />
+                    <Block reward="100" type="diamond_block" behaviour="onceOnly" />
+                    <Block reward="150" type="iron_block" behaviour="onceOnly" />
+                    <Block reward="-10" type="glass" />
                     <Block reward="-1" type="gold_block" />
                     <Block reward="-1" type="emerald_block" />
-                    <Block reward="-1" colour="PINK" type="wool"/>
                   </RewardForTouchingBlockType>
+                  <RewardForSendingCommand reward = "-0.1"/>
                   <RewardForMissionEnd rewardForDeath="0">
                       <Reward description="found_goal" reward="250" />
                   </RewardForMissionEnd>
-                  <RewardForReachingPosition>''' + \
-                      xml_position + \
-                  '''</RewardForReachingPosition>
                   <AgentQuitFromTouchingBlockType>
                       <Block type="redstone_block" description="found_goal"/>
                   </AgentQuitFromTouchingBlockType>

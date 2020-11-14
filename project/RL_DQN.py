@@ -26,11 +26,9 @@ REWARD = []
 
 # Hyperparameters
 class Hyperparameters:
-    SIZE = 50
-    REWARD_DENSITY = .1
-    PENALTY_DENSITY = .02
-    OBS_SIZE = 5
-    MAX_EPISODE_STEPS = 200
+    SIZE = 40
+    OBS_SIZE = 9
+    MAX_EPISODE_STEPS = 100
     MAX_GLOBAL_STEPS = 10000
     REPLAY_BUFFER_SIZE = 10000
     EPSILON_DECAY = .999
@@ -42,10 +40,9 @@ class Hyperparameters:
     START_TRAINING = 500
     LEARN_FREQUENCY = 1
     ACTION_DICT = {
-        0: 'movesouth 1', 
-        1: 'moveeast 0.25',  
-        2: 'movewest 0.25',  
-        3: 'movesouth 1' 
+        0: 'movesouth 1',  
+        1: 'moveeast 1',
+        2: 'movewest 1'
     }
 
 
@@ -70,54 +67,18 @@ class QNetwork(nn.Module):
         return self.linear(obs_flat)
 
 
-def get_action(obs, q_network, epsilon, allow_break_action):
+def get_action(obs, q_network, epsilon):
     
     obs_torch = torch.tensor(obs.copy(), dtype=torch.float).unsqueeze(0)
     action_values = q_network(obs_torch)
     if random.random() > epsilon:
         with torch.no_grad(): 
-            if not allow_break_action:
-                action_values[0, 3] = -float('inf')  
             action_idx = torch.argmax(action_values).item()
-    else: 
-        if not allow_break_action:
-            action_idx = random.randint(0,Hyperparameters.OBS_SIZE -3) 
-        else: 
-            action_idx = random.randint(0,Hyperparameters.OBS_SIZE -2 ) 
+    else:
+        action_idx = random.randint(0,2) 
     
     return action_idx
 
-'''    
-def get_observation(world_state):
-    
-    obs = np.zeros((2, Hyperparameters.OBS_SIZE, Hyperparameters.OBS_SIZE))
-    while world_state.is_mission_running:
-        time.sleep(0.1)
-        world_state = agent_host.getWorldState()
-        if len(world_state.errors) > 0:
-            raise AssertionError('Could not load grid.')
-
-        if world_state.number_of_observations_since_last_state > 0:
-            msg = world_state.observations[-1].text
-            observations = json.loads(msg)
-
-            grid = observations['floorAll']
-            grid_binary = [1 if x == 'diamond_ore' or x == 'lava' else 0 for x in grid]
-            obs = np.reshape(grid_binary, (2, Hyperparameters.OBS_SIZE, Hyperparameters.OBS_SIZE))
-
-            yaw = observations['Yaw']
-            if yaw == 270:
-                obs = np.rot90(obs, k=1, axes=(1, 2))
-            elif yaw == 0:
-                obs = np.rot90(obs, k=2, axes=(1, 2))
-            elif yaw == 90:
-                obs = np.rot90(obs, k=3, axes=(1, 2))
-            
-            break
-
-    return obs
-
-'''
 
 def prepare_batch(replay_buffer):
 
@@ -149,7 +110,7 @@ def log_returns(steps, returns):
     returns_smooth = np.convolve(returns, box, mode='same')
     plt.clf()
     plt.plot(steps, returns_smooth)
-    plt.title('Diamond Collector')
+    plt.title('MineGuyz')
     plt.ylabel('Return')
     plt.xlabel('Steps')
     plt.savefig('returns.png')
