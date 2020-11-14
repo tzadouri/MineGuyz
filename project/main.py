@@ -104,7 +104,8 @@ def get_observation(world_state):
             observations = json.loads(msg)
 
             grid = observations['floorAll']
-            grid_binary = [1 if x == 'diamond_ore' or x == 'lava' else 0 for x in grid]
+            #grid_binary = [1 if x == 'diamond_ore' or x == 'lava' else 0 for x in grid]
+            grid_binary = [1 if x == "gold_block" or x == "emerald_block" or x == "redstone_block" or x == "stone" or x == "brick_block" or x == "quartz_block" else 0 for x in grid]
             obs = np.reshape(grid_binary, (2, Hyperparameters.OBS_SIZE, Hyperparameters.OBS_SIZE))
 
             yaw = observations['Yaw']

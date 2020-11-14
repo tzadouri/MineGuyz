@@ -43,9 +43,9 @@ class Hyperparameters:
     LEARN_FREQUENCY = 1
     ACTION_DICT = {
         0: 'move 1', 
-        1: 'turn 0.15',  
-        2: 'turn -0.15',  
-        3: 'attack 1' 
+        1: 'turn 0.25',  
+        2: 'turn -0.25',  
+        3: 'move 0' 
     }
 
 
