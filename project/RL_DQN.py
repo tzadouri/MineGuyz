@@ -30,7 +30,7 @@ class Hyperparameters:
     REWARD_DENSITY = .1
     PENALTY_DENSITY = .02
     OBS_SIZE = 5
-    MAX_EPISODE_STEPS = 100
+    MAX_EPISODE_STEPS = 200
     MAX_GLOBAL_STEPS = 10000
     REPLAY_BUFFER_SIZE = 10000
     EPSILON_DECAY = .999
@@ -42,10 +42,10 @@ class Hyperparameters:
     START_TRAINING = 500
     LEARN_FREQUENCY = 1
     ACTION_DICT = {
-        0: 'move 1', 
-        1: 'turn 0.25',  
-        2: 'turn -0.25',  
-        3: 'move 0' 
+        0: 'movesouth 1', 
+        1: 'moveeast 0.25',  
+        2: 'movewest 0.25',  
+        3: 'movesouth 1' 
     }
 
 

@@ -193,7 +193,7 @@ def main(agent_host):
             allow_break_action = obs[1, int(Hyperparameters.OBS_SIZE/2)-1, int(Hyperparameters.OBS_SIZE/2)] == 1
             action_idx = get_action(obs, q_network, epsilon, allow_break_action)
             command = Hyperparameters.ACTION_DICT[action_idx]
-
+            #print("command ", command)
             # Take step
             agent_host.sendCommand(command)
 
@@ -206,7 +206,7 @@ def main(agent_host):
             if episode_step >= Hyperparameters.MAX_EPISODE_STEPS or \
                     (obs[0, int(Hyperparameters.OBS_SIZE/2)-1, int(Hyperparameters.OBS_SIZE/2)] == 1 and \
                     obs[1, int(Hyperparameters.OBS_SIZE/2)-1, int(Hyperparameters.OBS_SIZE/2)] == 0 and \
-                    command == 'move 1'):
+                    command == 'movesouth 1'):
                 done = True
                 time.sleep(2)  
 
@@ -220,7 +220,7 @@ def main(agent_host):
             reward = 0
             for r in world_state.rewards:
                 reward += r.getValue()
-            episode_return += reward
+            episode_return += reward + 5
 
             # Store step in replay buffer
             replay_buffer.append((obs, action_idx, next_obs, reward, done))

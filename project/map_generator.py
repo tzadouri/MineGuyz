@@ -13,13 +13,13 @@ def GetMissionXML(SIZE , OBS_SIZE, MAX_EPISODE_STEPS):
   xml_position = ""
   for i in range(1,int(SIZE),4):
         for j in range(-WIDTH,WIDTH+1):
-          xml_position += "<Marker oneshot='true' reward='3' tolerance='0.1' x='{}' y='10' z='{}' />".format(j, i)
+          xml_position += "<Marker oneshot='true' reward='1' tolerance='0.1' x='{}' y='10' z='{}' />".format(j, i)
 
   for x in range(-WIDTH,WIDTH+1):
         for y in range(1,int(SIZE/4)):
             # if random.random() < 0.2:
             #     myxml += "<DrawBlock x='{}' y='10' z='{}' type='{}'/>".format(x,y,random.choice(blocktype))
-            if random.random() < 0.05:
+            if random.random() < 0.15:
                 myxml += "<DrawCuboid x1='{}' y1='10' z1='{}' x2='{}' y2='12' z2='{}'  type='{}' />".format(x,y,x,y,random.choice(blocktype))
   return '''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
             <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
