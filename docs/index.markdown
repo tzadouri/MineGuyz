@@ -18,3 +18,5 @@ layout: home
 
 <br />
 Feel free to checkout the [Source Code](https://github.com/tzadouri/MineGuyz)
+
+Please checkout the [Video](https://www.youtube.com/watch?v=SaT4Ns7_akk&feature=youtu.be)

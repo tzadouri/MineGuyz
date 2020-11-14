@@ -168,6 +168,7 @@ def main(agent_host):
     start_time = time.time()
     returns = []
     steps = []
+    loss_array = []
 
     # Begin main loop
     loop = tqdm(total=Hyperparameters.MAX_GLOBAL_STEPS, position=0, leave=False)
@@ -241,6 +242,7 @@ def main(agent_host):
 
         num_episode += 1
         returns.append(episode_return)
+        loss_array.append(episode_loss)
         steps.append(global_step)
         avg_return = sum(returns[-min(len(returns), 10):]) / min(len(returns), 10)
         loop.update(episode_step)
@@ -248,7 +250,7 @@ def main(agent_host):
             num_episode, global_step, (time.time() - start_time) / 60, episode_loss, episode_return, avg_return))
 
         if num_episode > 0 and num_episode % 10 == 0:
-            log_returns(steps, returns)
+            log_returns(steps, loss_array)
             print()
 
 

@@ -53,7 +53,6 @@ class QNetwork(nn.Module):
     
     def __init__(self, obs_size, action_size, hidden_size=128):
         super().__init__()
-
         self.cnn = nn.Sequential(
                 nn.Conv2d(obs_size[0], hidden_size, kernel_size=3,padding=1),
                 nn.ReLU(),
@@ -65,6 +64,7 @@ class QNetwork(nn.Module):
         
     def forward(self, obs):
         batch_size = obs.shape[0]
+        print(batch_size)
         obs = self.cnn(obs)
         obs_flat = obs.view(batch_size, -1)
         return self.linear(obs_flat)
@@ -149,8 +149,8 @@ def log_returns(steps, returns):
     returns_smooth = np.convolve(returns, box, mode='same')
     plt.clf()
     plt.plot(steps, returns_smooth)
-    plt.title('Diamond Collector')
-    plt.ylabel('Return')
+    plt.title('Loss Function')
+    plt.ylabel('Loss')
     plt.xlabel('Steps')
     plt.savefig('returns.png')
 
