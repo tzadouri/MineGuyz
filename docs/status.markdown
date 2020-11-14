@@ -34,25 +34,28 @@ permalink: /status/
 
 <br /> 
 
-#### Since the information on the world is extremely limited and there is no access to the Q* , by utilizing convolutional neural networks as a function approximator we can construct one and train it to be similar Q*. The Bellman equation given below: 
-
+#### Since the information on the world is extremely limited and there is no access to the Q* , by utilizing convolutional neural networks as a function approximator we can construct one and train it to be similar Q* to. The Bellman equation given below is used as such that every Q* function for a policy obeys this equation.  
 <br />
 &ensp;<img src="https://render.githubusercontent.com/render/math?math=Q^{\pi}(s, a) = r + \gamma Q^{\pi}(s', \pi(s'))">
 
 <br /> 
 
-#### is used as such that every Q* function for a policy obeys this equation.  
 
 **The actions consists of the following:**
 
-1. *Moving south (Forward)*
-2. *Moving west (Left Horizontally)*
-3. *Moving east (Right Horizontally)* 
+```math
+1. Moving south (Forward)
+2. Moving west (Left Horizontally)
+3. Moving east (Right Horizontally) 
+```
+**The state space is the following:**
 
-***The state space is the following:***
+```math
+[-10,10] x [1,40] = 840
+```
 
-
-#### *Loss function:*
+<br />
+**Loss function:**
 
 #### As mentioned above the purpose of Deep Q-learning is to find the Q function in order to construct a policy to maximize the necessary reward. For every epoch, the Q function gets updated by minimizing the loss function below which is essentially the difference between the two sides of the equality of the Bellman equation specified above, also known as the temporal difference error. 
 
@@ -61,22 +64,26 @@ permalink: /status/
 
 <br /> 
 
-#### *Reward Functions*
+**Reward Functions**
 
 <br />
 &ensp;<img src="https://render.githubusercontent.com/render/math?math=R(s)=  250\hspace{0.4cm} \text{Agent reaches destination}">
-&ensp;<img src="https://render.githubusercontent.com/render/math?math=R(s)=  -1\hspace{0.4cm} \text{Agent touches the glass or the wals around the map or the glass on ground}">
+&ensp;<img src="https://render.githubusercontent.com/render/math?math=R(s)=  -1\hspace{0.4cm} \text{Agent touches the glass or the walls around the map or the glass on ground representing a river}">
 &ensp;<img src="https://render.githubusercontent.com/render/math?math=R(s)=  -1\hspace{0.4cm} \text{Agent touches diamond block}">
 &ensp;<img src="https://render.githubusercontent.com/render/math?math=R(s)=  -1\hspace{0.4cm} \text{Agent touches emerald_blck or the pole obstacles in the first phase}">
 &ensp;<img src="https://render.githubusercontent.com/render/math?math=R(s)=  -1\hspace{0.4cm} \text{Agent touches gold_block or the pole obstacles in the first phase}">
 &ensp;<img src="https://render.githubusercontent.com/render/math?math=R(s)=  -1\hspace{0.4cm} \text{Agent touches the Pink wool or the ground for initial state}">
-&ensp;<img src="https://render.githubusercontent.com/render/math?math=R(s)=   1\hspace{0.4cm} \text{Every time the agent passes a quarter of the distance on the map vertically toward the finish line}">
+&ensp;<img src="https://render.githubusercontent.com/render/math?math=R(s)=    1\hspace{0.4cm} \text{Every time the agent passes a quarter of the distance on the map vertically toward the finish line}">
 
 
 <br /> 
 
 
-#### For the Q-network, the model will be a convolutional neural network that takes the observation tensor’s first index, and then it will output the action size. Essentially the network is attempting to predict the expected return of each specific action for the given input.
+#### For the Q-network, the model will be a convolutional neural network that takes the observation tensor’s first index, and then it will output the action size. Essentially the network is attempting to predict the expected return of each specific action for the given input. In terms of deciding which action should be chosen, the epsilon greedy policy is implemented where partly the model chooses the action and sometimes the actions is chosen by random probability of starting with the hpyerparameter epsilon start and decaying toward epsilon end. Then epsilon decay hyperparameter is used to manage the rate. The following figure is a demonstration of the flow of the program where action chosen by random or epsilon greedy is an input to the Malmo environment where next is step is returned. The results are recorded in the replay memory and optimizatin is implemented on every iteration where random batches from replay memory are selected for the new policy training.  
+
+
+
+![My image Name](/assets/images/fig_approach.png)
 
 
 <br />
