@@ -89,17 +89,20 @@ permalink: /status/
 <br />
 ### Evaluation
 
+
+
+
+
+<br />
+
+### Remaining Goals 
+
 <h4>As of this status report we have yet to add the 3rd stage for our agent to pass through. For this stage we are thinking of something a bit more complex, perhaps a mage of bridges for the agent to learn its way through as well as maybe some enemies, we are currently drafting ideas and want to make this stage special. We would also like to implement some type of computer vision as well, most likely using some type of Pytorch library to do so, we believe this will significantly improve the accuracy and training speed of our agent as well as make its movements far more realistic. Per the recommendation of the professor we are also looking at adding some type of a depth map to our project as well, apparently with the help of a built in Malmo library. This will make the agent far more aware of just what is surrounding it and its overall distance from the finish line. Furthermore we hope to put this added complexity of the agent to good use in our more intricate third phase, which we are currently drafting ideas for.</h4>
 
  <h4>Our final goal for this project is to ultimately be able to have multiple agents compete for who can get to the end the fastest. This will take full advantage of the upgrades that we are making to our agent in the coming weeks. Each agent will be given a fixed amount of steps and time to be trained in and its parameters with respect to a deep convolutional neural network will be exported to a text file. During the competition each agent will be configured to its trained state and will then be set free against the other agents. This competition will be displayed in our final video and report.</h4>
 
 <br />
 
-### Remaining Goals 
-
-
-
-<br />
 ### Challenges 
 
 
