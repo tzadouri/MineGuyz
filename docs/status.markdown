@@ -85,13 +85,36 @@ permalink: /status/
 
 ![My image Name](/assets/images/fig_approach.png)
 
-
 <br />
+
 ### Evaluation
 
+#### Qualitative
+
+<h4>Since the goal of the agent is to make it to the end of the obstacle course with minimal collisions, and in the least number of steps, we can qualitatively see the agent learning as the episodes progress. In the first few episodes, the agent gets stuck a few times behind some obstacles, and is not able to make it to the redstone finish line within the specified max step limit. However after about 10 episodes it starts to make it to the end and achieves the highest reward of making it to the end. After which the agent seeks to minimize the steps, since each step is a slight penalty, to maximize overall reward and find the path that is most like a straight path to the finish line.</h4>
 
 
 
+#### Quantitative
+
+<h4>
+  Below we can see the reward return graph chart. The goal of the agent is to make it to the end with minimal collisions with any of the obstacles. For each section in the obstacle course the agent is rewarded based on the amount of difficulty it is to reach past each threshold. The agent gets a penalty each time it hits an obstacle or goes off path. Furthermore, the agent is incentivized to reach the redstone finish line, due to the finish line having the highest reward of any threshold. We have also made progression forward a lot faster in terms of steps for each in the action dictionary, so the agent would progress forward more than anything else. The reward chart above details how the agent learns as the episodes progress. We can see that after a while in training the agent's return goes down, this can perhaps be due to the neural network overtraining and learning specific patterns and not being general enough for different randomly general obstacle courses.
+</h4>
+
+![graph1](assets/images/graph1.png)
+
+<h4>
+Later we adjusted the reward system for the agent. We removed any reward for moving forwards, instead changing to there being a penalty for being for each step taken. We then set the rewards for each subsection to be 100, and 150, bringing them a lot closer together. We then set the penalty for going into the water to -10 and for hitting any obstacle to -1. After implementing these changes we then restrained our model and were pleased with the results. We began to see the rewards increase constantly and not decrease and training went on beyond a certain threshold.
+Below is the reward graph for the newly trained agent.
+</h4>
+
+![graph1](assets/images/graph2.png)
+
+<h4>
+For this training attempt we also graphed the episode loss and we can see that it consistently began to converge towards 0 and the steps went towards positive infinity.
+</h4>
+
+![graph1](assets/images/loss.png)
 
 <br />
 
