@@ -114,7 +114,7 @@ Below is the reward graph for the newly trained agent.
 For this training attempt we also graphed the episode loss and we can see that it consistently began to converge towards 0 and the steps went towards positive infinity.
 </h4>
 
-![graph1](assets/images/loss.png)
+![graph1](assets/images/Loss.png)
 
 <br />
 
