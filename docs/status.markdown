@@ -105,10 +105,21 @@ permalink: /status/
 
 ### Challenges 
 
+<h4>A challenge that we are currently facing is deciding upon what exactly we want our final stage to be like, we are trying to implement some type of dynamic environment that moves at a constant speed, however we are facing challenges with regards to implementing this in Malmo as well as what approach we might need in order to train the agent in order to deal with a dynamically moving environment.
+</h4>
+
+<h4>
+Some of the other challenges we might face will be implementing our desired features in the amount of time that we have left. We had hoped to get computer vision working by the time this report was due, however due to the amount of time it took to get used to working with Malmo beyond the the basic homework, i.e creating the environment, and training and DQNN to allow the agent to make it to the very end, we ran out of time, although we have looked deeply into it. Now knowing the fundamentals of Malmo we hope to be able to be more productive with time hence why our goals for the second half are more ambitious. If we get stuck we might ask our favorite TA Kolby for any advice or implementation strategies.
+</h4>
+
+<h4>
+Lastly another challenge that we might face in the multi agent implementation. We had originally desired to have 10 or so agents compete at once for who could make it to the end in a myriad of different levels. However we may run into limitations with regards to training time and hardware resource limits as to how many agents we can have and how many different fields.
+</h4>
 
 
 
 <br />
+
 ### Resources Used
 
 #### The resources utilized so far have been using Malmo’s API to simulate the environment and Pytroch for creating tensors, neural networks, and optimizers. Certain functionalities from assignment that were useful were derived for this project. The following resources were used to develop implementations or to develop ideas.
