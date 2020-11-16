@@ -27,7 +27,7 @@ Actions the agent needs to take, such as move direction, jump, or increase the s
 
 ## AI/ML Algorithms 
 
-#### Predominantly the algorithms we plan to implement are deep convolutional neural networks and Deep Q Learning algorithms. Possibly A* for navigation will be utilized. 
+#### Predominantly the algorithms we plan to implement are deep convolutional neural networks and Deep Q Learning algorithms. Possibly A* for navigation will be utilized. Also Malmos API's depth map functionality will be used for object avoidance and image processing.   
 
 
 
