@@ -4,7 +4,6 @@
 
 Title: MineGuyz
 layout: home
-permalink: /MineGuyz
 ---
 
 ### MineGuyz is a project with environement in Minecraft inspired by the game Fall Guys. The purpose of this project is to utilize Reinforcment learning algorithms and Convolutional Neural Networks to allow the agent or titular jellybean to finish the cross line first and win the competition by avoiding all the stable and incoming obstacles.
