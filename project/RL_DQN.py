@@ -18,12 +18,6 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 import math
 
-'''
-Transition = namedtuple('Transition', ('state, action, nex_state', 'reward'))
-LOSS = []
-REWARD = []
-'''
-
 # Hyperparameters
 class Hyperparameters:
     SIZE = 40
