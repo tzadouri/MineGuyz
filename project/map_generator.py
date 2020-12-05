@@ -1,24 +1,18 @@
 import random
 blocktype = ["gold_block", "emerald_block"]
 color = ["WHITE", "MAGENTA", "LIGHT_BLUE", "YELLOW", "LIME", "CYAN", "PURPLE", "BLUE", "BROWN", "GREEN", "RED"]
-#def GetMissionXML(SIZE=40,WIDTH=10):
+
+
 def GetMissionXML(SIZE , OBS_SIZE, MAX_EPISODE_STEPS):
   WIDTH = 10 
   myxml = ""
-  # bp = 
+
   bridgeL = int(SIZE/4)
   bridgeW = int(SIZE/8)
   riverW = WIDTH-int(SIZE/8)
   
-  # xml_position = ""
-  # for i in range(1,int(SIZE),4):
-  #       for j in range(-WIDTH,WIDTH+1):
-  #         xml_position += "<Marker oneshot='true' reward='1' tolerance='0.1' x='{}' y='10' z='{}' />".format(j, i)
-
   for x in range(-WIDTH,WIDTH+1):
-        for y in range(1,int(SIZE/4)):
-            # if random.random() < 0.2:
-            #     myxml += "<DrawBlock x='{}' y='10' z='{}' type='{}'/>".format(x,y,random.choice(blocktype))
+        for y in range(1,int(SIZE/4)):			
             if random.random() < 0.1:
                 myxml += "<DrawCuboid x1='{}' y1='10' z1='{}' x2='{}' y2='12' z2='{}'  type='{}' />".format(x,y,x,y,random.choice(blocktype))
   return '''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
