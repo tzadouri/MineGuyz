@@ -16,7 +16,7 @@ from numpy.random import randint
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
-from map_generator import GetMissionXML
+from map_generator_final import GetMissionXML
 from RL_DQN import QNetwork, Hyperparameters, get_action, prepare_batch, learn, log_returns
 from get_observation import get_observation
 from init_malmo import init_malmo

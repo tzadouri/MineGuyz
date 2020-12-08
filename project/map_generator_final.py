@@ -17,6 +17,7 @@ def GetMissionXML(SIZE , OBS_SIZE, MAX_EPISODE_STEPS):
                 myxml += "<DrawCuboid x1='{}' y1='10' z1='{}' x2='{}' y2='12' z2='{}'  type='{}' />".format(x,y,x,y,random.choice(blocktype))
               
   version = random.randrange(2)
+  myxml2 = "" 
   if version == 0:
     x = 6
     for y in range(int(SIZE*2/3)+2, SIZE,2):

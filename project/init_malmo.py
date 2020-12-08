@@ -2,7 +2,7 @@ try:
     from malmo import MalmoPython
 except:
     import MalmoPython
-from map_generator import GetMissionXML
+from map_generator_final import GetMissionXML
 from RL_DQN import QNetwork, Hyperparameters, get_action, prepare_batch, learn, log_returns
 import time
 
