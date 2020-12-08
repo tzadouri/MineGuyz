@@ -15,6 +15,33 @@ def GetMissionXML(SIZE , OBS_SIZE, MAX_EPISODE_STEPS):
         for y in range(1,int(SIZE/4)):			
             if random.random() < 0.1:
                 myxml += "<DrawCuboid x1='{}' y1='10' z1='{}' x2='{}' y2='12' z2='{}'  type='{}' />".format(x,y,x,y,random.choice(blocktype))
+              
+  version = random.randrange(2)
+  if version == 0:
+    x = 6
+    for y in range(int(SIZE*2/3)+2, SIZE,2):
+        myxml2 += "<DrawCuboid x1='{}' y1='10' z1='{}' x2='{}' y2='12' z2='{}'  type='{}' />".format(x,y,x+2,y,random.choice(blocktype))
+        if x == 6:
+            x=8
+        else:
+            x=6
+    for x in range(-10,-5):
+        for y in range(int(SIZE*2/3)+2, SIZE):      
+            if random.random() < 0.2:
+                myxml2 += "<DrawBlock x='{}' y='9' z='{}'  type='glass' />".format(x,y)
+  else:
+    x = -9
+    for y in range(int(SIZE*2/3)+2, SIZE,2):
+        myxml2 += "<DrawCuboid x1='{}' y1='10' z1='{}' x2='{}' y2='12' z2='{}'  type='{}' />".format(x,y,x+2,y,random.choice(blocktype))
+        if x == -9:
+            x=-7
+        else:
+            x=-9
+    for x in range(6,10):
+        for y in range(int(SIZE*2/3)+2, SIZE):      
+            if random.random() < 0.2:
+                myxml2 += "<DrawBlock x='{}' y='9' z='{}'  type='glass' />".format(x,y)
+                
   return '''<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
             <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             
@@ -63,6 +90,12 @@ def GetMissionXML(SIZE , OBS_SIZE, MAX_EPISODE_STEPS):
                       "<DrawCuboid x1='{}' y1='0' z1='0'  x2='{}' y2='0' z2='{}' type='glass'/>".format(2*riverW+2*bridgeW+1,3*riverW+2*bridgeW,bridgeL) +\
                     '''</DrawingDecorator>
                   </AnimationDecorator>
+                  
+                  <DrawingDecorator>''' + \
+                    "<DrawCuboid x1='-5' y1='10' z1='{}' x2='5' y2='15' z2='{}' type='glass'/>".format(int(SIZE*2/3)+1,SIZE) + \
+                    myxml2 + \
+                  '''</DrawingDecorator>
+                  
                   <ServerQuitWhenAnyAgentFinishes/>
                 </ServerHandlers>
               </ServerSection>
